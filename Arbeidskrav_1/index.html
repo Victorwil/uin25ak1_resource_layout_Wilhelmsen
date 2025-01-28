@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles.css" rel="stylesheet" media="all">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Arbeidskrav 1</title>
+</head>
+<body>
+<main id="categories-container">
+
+</main>
+    <section id="categories-section">
+    
+</section>
+    <section id="expanded-content">
+   
+</section>
+
+    <script src="ressurser.js"></script>
+
+    <script>
+    const categoriesContainer = document.getElementById("categories-container");
+    const expandedContent = document.getElementById("expanded-content");
+
+    const htmlResources = resources.filter(resource => resource.category === "HTML");
+
+if (htmlResources.length > 0) {
+    const htmlContent = htmlResources[0]; 
+
+    expandedContent.innerHTML = `
+        <h2>${htmlContent.category}</h2>
+        <p>${htmlContent.text}</p>
+        <ul>
+            ${htmlContent.sources
+                .map(
+                    (source) =>
+                        `<li><a href="${source.url}" target="_blank">${source.title}</a></li>`
+                )
+                .join("")}
+        </ul>
+    `;
+    expandedContent.classList.add("visible");
+}
+
+    resources.forEach((resource, index) => {
+        const card = document.createElement("article");
+        card.className = "category-card";
+        card.textContent = resource.category;
+
+        card.addEventListener("click", () => {
+       
+        expandedContent.innerHTML = `
+            <h2>${resource.category}</h2>
+            <p>${resource.text}</p>
+            <ul>
+                ${resource.sources
+                    .map((source) => `<li><a href="${source.url}" target="_blank">${source.title}</a></li>`)
+                    .join("")}
+            </ul>
+        `;
+        expandedContent.classList.add("visible");
+    // for .map og .filter har jeg brukt ai. Prompt: Hvordan kan jeg få vist html elementene når siden åpnes, ved hjelp av .map og .filter?
+    // Gå også konteks i form av koden jeg hadde fra før av. 
+
+         document.querySelectorAll(".category-card").forEach((c) => c.classList.remove("active"));
+                card.classList.add("active");
+    });
+
+
+    categoriesContainer.appendChild(card);
+});
+     
+      
+
+    </script>
+</body>
+</html>
