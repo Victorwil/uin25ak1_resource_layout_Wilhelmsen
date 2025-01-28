@@ -32,14 +32,6 @@ if (htmlResources.length > 0) {
     expandedContent.innerHTML = `
         <h2>${htmlContent.category}</h2>
         <p>${htmlContent.text}</p>
-        <ul>
-            ${htmlContent.sources
-                .map(
-                    (source) =>
-                        `<li><a href="${source.url}" target="_blank">${source.title}</a></li>`
-                )
-                .join("")}
-        </ul>
     `;
     expandedContent.classList.add("visible");
 }
